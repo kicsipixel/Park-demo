@@ -1,0 +1,37 @@
+//
+//  TextFieldModifier.swift
+//  ParkDemo
+//
+//  Created by Szabolcs Tóth on 26.11.2025.
+//  Copyright © 2025 Szabolcs Tóth. All rights reserved.
+//
+
+import SwiftUI
+
+struct CustomTextFieldModifier: ViewModifier {
+
+  // Private properties
+  // Properties
+  @Binding var text: String
+  let image: String
+
+  func body(content: Content) -> some View {
+    HStack {
+      Image(systemName: "\(image)")
+        .foregroundStyle(text.isEmpty ? .accent.opacity(0.8) : .accent)
+        .padding(.leading)
+      content
+        .foregroundStyle(.accent)
+        .textContentType(.emailAddress)
+        .textInputAutocapitalization(.never)
+        .padding(.vertical)
+    }
+    .overlay(
+      RoundedRectangle(cornerRadius: 5)
+        .stroke(text.isEmpty ? .accent.opacity(0.2) : .accent, lineWidth: 1)
+    )
+    .background(text.isEmpty ? .accent.opacity(0.2) : .accent.opacity(0.05))
+    .animation(.easeInOut(duration: 0.8), value: text.isEmpty)
+    .cornerRadius(5)
+  }
+}
