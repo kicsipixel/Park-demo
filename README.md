@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./imgages/pop.png" alt="Leaf" width="250"/>
+  <img src="./images/pop.png" alt="Leaf" width="250"/>
 </p>
 
 # Parks of Prague - SwiftUI JWT Authentication Demo
@@ -63,5 +63,5 @@ This project is designed as a learning resource for developers who want to under
 
 <br />
 <p align="center">
-    <img src="./imgages/leaf.png" alt="Leaf" width="50"/>
+    <img src="./images/leaf.png" alt="Leaf" width="50"/>
 </p>
