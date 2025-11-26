@@ -31,13 +31,13 @@ This project is designed as a learning resource for developers who want to under
 ## Screenshots
 
 <p align="center">
-    <img src="./imgages/demo1.png" alt="Leaf" width="250" style="margin: 0 35px 35px 0;"/>
-    <img src="./imgages/demo4.png" alt="Leaf" width="250" style="margin: 0 35px 35px 0;"/>
+    <img src="./images/demo1.png" alt="Leaf" width="250" style="margin: 0 35px 35px 0;"/>
+    <img src="./images/demo4.png" alt="Leaf" width="250" style="margin: 0 35px 35px 0;"/>
 </p>
 
 <p align="center">
-    <img src="./imgages/demo5.png" alt="Leaf" width="250" style="margin: 0 35px 0 0;" />
-    <img src="./imgages/demo2.png" alt="Leaf" width="250" style="margin: 0 35px 0 0;"/>
+    <img src="./images/demo5.png" alt="Leaf" width="250" style="margin: 0 35px 0 0;" />
+    <img src="./images/demo2.png" alt="Leaf" width="250" style="margin: 0 35px 0 0;"/>
 </p>
 
 ---
