@@ -9,5 +9,5 @@
 import SwiftUI
 
 extension EnvironmentValues {
-    @Entry var usersController = UsersController(httpClient: HTTPClient())
+    @Entry var usersController = UsersController(networkManager: NetworkManager(path: "parks"))
 }

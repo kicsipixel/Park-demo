@@ -10,15 +10,13 @@ import SwiftUI
 
 @Observable @MainActor
 final class ParkViewModel {
-  // Private Properties
-  let httpClient: HTTPClient
-
   // Properties
   var parks = [Park]()
+  let networkManager: NetworkManager
 
   // Initializer
-  init(httpClient: HTTPClient) {
-    self.httpClient = httpClient
+  init(networkManager: NetworkManager) {
+    self.networkManager = NetworkManager(path: "parks")
   }
 
   func createPark(from: ParkRequest) async throws {
@@ -46,6 +44,6 @@ final class ParkViewModel {
   }
 
   func listParks() async throws {
-    parks = try await httpClient.listAllParks()
+    parks = try await networkManager.listAllParks()
   }
 }

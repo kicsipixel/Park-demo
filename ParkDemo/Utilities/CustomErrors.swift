@@ -8,10 +8,13 @@
 
 import Foundation
 
+import Foundation
+
 enum AppError: LocalizedError {
     case loginFailed(String)
     case parkRequestFailed(String)
     case tokenExpired(String)
+    case invalidURL
 
     var errorDescription: String? {
         switch self {
@@ -29,6 +32,11 @@ enum AppError: LocalizedError {
             return NSLocalizedString(
                 "Your session has expired. Please log in again.",
                 comment: "Token expired"
+            )
+        case .invalidURL:
+            return NSLocalizedString(
+                "The requested URL is invalid.",
+                comment: "Invalid URL"
             )
         }
     }
@@ -50,7 +58,13 @@ enum AppError: LocalizedError {
                 "Log in again to refresh your session and continue.",
                 comment: "Recovery suggestion for token expired"
             )
+        case .invalidURL:
+            return NSLocalizedString(
+                "Verify the endpoint configuration and try again.",
+                comment: "Recovery suggestion for invalid URL"
+            )
         }
     }
 }
+
 

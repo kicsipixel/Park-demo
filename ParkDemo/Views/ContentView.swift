@@ -22,7 +22,7 @@ struct ContentView: View {
       .task {
         do {
           try await parkViewModel.listParks()
-          //  isAuthenticated = try await usersController.verifyToken()
+          isAuthenticated = try await usersController.verifyToken()
         }
         catch {
           errorMessage = error.localizedDescription
@@ -96,5 +96,5 @@ struct ContentView: View {
 // MARK: - Preview
 #Preview {
   ContentView()
-    .environment(ParkViewModel(httpClient: HTTPClient()))
+    .environment(ParkViewModel(networkManager: NetworkManager(path: "parks")))
 }

@@ -10,17 +10,17 @@ import SwiftUI
 
 struct UsersController {
   // Properties
-  let httpClient: HTTPClient
+  let networkManager: NetworkManager
 
   func login(username: String, password: String) async throws {
-    let response = try await httpClient.login(username: username, password: password)
+    let response = try await networkManager.login(username: username, password: password)
     if let token = response.token {
       Keychain.set(token, forKey: "jwttoken")
     }
   }
 
   func verifyToken() async throws -> Bool {
-      let response = try await httpClient.verifyToken()
-      return response.name != nil
+    let response = try await networkManager.verifyToken()
+    return response.name != nil
   }
 }

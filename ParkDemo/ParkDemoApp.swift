@@ -12,11 +12,11 @@ import SwiftUI
 struct ParkDemoApp: App {
   // Private Properties
   private let usersController: UsersController
-  @State private var parkViewModel = ParkViewModel(httpClient: HTTPClient())
+    @State private var parkViewModel = ParkViewModel(networkManager: NetworkManager(path: "parks"))
 
   // Initializer
   init() {
-    usersController = UsersController(httpClient: HTTPClient())
+    usersController = UsersController(networkManager: NetworkManager(path: "parks"))
   }
 
   var body: some Scene {
