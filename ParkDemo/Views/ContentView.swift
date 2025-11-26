@@ -15,7 +15,7 @@ struct ContentView: View {
   @State private var errorMessage: String?
   @State private var showErrorAlert = false
   @State private var showLoginView: Bool = false
-    @State private var showAddParkView: Bool = false
+  @State private var showAddParkView: Bool = false
 
   var body: some View {
     content
@@ -37,38 +37,44 @@ struct ContentView: View {
         }
       }
       .fullScreenCover(isPresented: $showAddParkView) {
-          AddParkView()
+        AddParkView()
       }
   }
 
   @ViewBuilder
   var content: some View {
     ZStack {
-     
+
       // MARK: - Main content
       NavigationStack {
-          ZStack {
-              // Background color
-              Color.accent.opacity(0.05).ignoresSafeArea()
-              
-              Group {
-                  if parkViewModel.parks.count > 0 {
-                      VStack {
-                          // Logo
-                          Image("LogoImage")
-                          
-                          // List view
-                          ListView(parks: parkViewModel.parks, isAuthenticated: $isAuthenticated, errorMessage: $errorMessage, showErrorAlert: $showErrorAlert, showLoginView: $showLoginView)
-                      }
-                  }
-                  else {
-                      Image("BackgroundImage")
-                  }
+        ZStack {
+          // Background color
+          Color.accent.opacity(0.05).ignoresSafeArea()
+
+          Group {
+            if parkViewModel.parks.count > 0 {
+              VStack {
+                // Logo
+                Image("LogoImage")
+
+                // List view
+                ListView(parks: parkViewModel.parks, isAuthenticated: $isAuthenticated, errorMessage: $errorMessage, showErrorAlert: $showErrorAlert, showLoginView: $showLoginView)
               }
-              .toolbar {
-                  AppToolbarView(isAuthenticated: $isAuthenticated, errorMessage: $errorMessage, showErrorAlert: $showErrorAlert, showLoginView: $showLoginView, showAddParkView: $showAddParkView)
-              }
+            }
+            else {
+              Image("BackgroundImage")
+            }
           }
+          .toolbar {
+            AppToolbarView(
+              isAuthenticated: $isAuthenticated,
+              errorMessage: $errorMessage,
+              showErrorAlert: $showErrorAlert,
+              showLoginView: $showLoginView,
+              showAddParkView: $showAddParkView
+            )
+          }
+        }
       }
 
       // MARK: - Overlay when not authenticated

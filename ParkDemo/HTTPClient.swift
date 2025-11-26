@@ -100,7 +100,7 @@ struct HTTPClient {
   // MARK: - PARKS
   // MARK: - lists parks
   func listAllParks() async throws -> [Park] {
-    guard let url = URL(string: "http://localhost:8080/api/v1/parks") else {
+    guard let url = URL(string: "http://localhost:8080/api/v1/park") else {
       throw URLError(.badURL)
     }
 
