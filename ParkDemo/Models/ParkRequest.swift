@@ -13,8 +13,8 @@ struct ParkRequest: Codable {
         let name: String
     }
     struct Coordinates: Codable {
-        let longitude: Double
         let latitude: Double
+        let longitude: Double
     }
 
     let details: Details

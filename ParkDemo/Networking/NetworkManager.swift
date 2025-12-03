@@ -149,4 +149,48 @@ public final class NetworkManager {
       }
     }
   }
+
+  // MARK: - creates a park
+  func createPark(from parkRequest: ParkRequest) async throws {
+    let endpoint = ParkAPI.createPark(path: self.path)
+    let components = buildULR(endpoint: endpoint)
+
+    guard let url = components.url else {
+      throw AppError.invalidURL
+    }
+
+    var request = URLRequest(url: url)
+    request.httpMethod = endpoint.method.rawValue
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+    if let token = Keychain<String>.get("jwttoken") {
+      request.addValue(
+        "Bearer \(token)",
+        forHTTPHeaderField: "Authorization"
+      )
+    }
+
+    request.httpBody = try JSONEncoder().encode(parkRequest)
+
+    let (data, response) = try await URLSession.shared.data(for: request)
+    
+      guard let httpResponse = response as? HTTPURLResponse else {
+      throw URLError(.badServerResponse)
+    }
+
+    if httpResponse.statusCode != 200 {
+      // Decode error payload to extract message
+      struct ServerError: Decodable {
+        struct ErrorDetail: Decodable { let message: String }
+        let error: ErrorDetail
+      }
+
+      if let serverError = try? JSONDecoder().decode(ServerError.self, from: data) {
+        throw AppError.parkRequestFailed(serverError.error.message)
+      }
+      else {
+        throw AppError.parkRequestFailed("Unknown error occurred.")
+      }
+    }
+  }
 }

@@ -19,28 +19,8 @@ final class ParkViewModel {
     self.networkManager = NetworkManager(path: "parks")
   }
 
-  func createPark(from: ParkRequest) async throws {
-    //        let body = ParkRequest(
-    //            details: .init(name: "Letenské sady- 2"),
-    //            coordinates: .init(longitude: 4.4202892, latitude: 50.0959721)
-    //        )
-    //
-    //        var request = URLRequest(
-    //            url: URL(string: "http://localhost:8080/api/v1/parks")!
-    //        )
-    //        request.httpMethod = "POST"
-    //        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-    //
-    //        if let token = Keychain<String>.get("jwttoken") {
-    //            request.addValue(
-    //                "Bearer \(token)",
-    //                forHTTPHeaderField: "Authorization"
-    //            )
-    //        }
-    //
-    //        request.httpBody = try JSONEncoder().encode(body)
-    //
-    //        let (_, _) = try await URLSession.shared.data(for: request)
+  func createPark(from parkRequest: ParkRequest) async throws {
+    try await networkManager.createPark(from: parkRequest)
   }
 
   func listParks() async throws {

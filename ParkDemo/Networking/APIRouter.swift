@@ -38,13 +38,16 @@ public enum ParkAPI: API {
   case loginUser(path: String)
   /// Lists all parks
   case listParks(path: String)
+  /// Creates park
+  case createPark(path: String)
 
   /// Connecting to `127.0.0.1` will use `http`. Otherwise it is production and uses `https`.
   public var scheme: HTTPScheme {
     switch self {
     case .verifyToken,
       .loginUser,
-      .listParks:
+      .listParks,
+      .createPark:
       if isIPAddressNumeric(APIEndpoint.baseURL) {
         return .http
       }
@@ -59,7 +62,8 @@ public enum ParkAPI: API {
     switch self {
     case .verifyToken,
       .loginUser,
-      .listParks:
+      .listParks,
+      .createPark:
       return APIEndpoint.baseURL
     }
   }
@@ -69,7 +73,8 @@ public enum ParkAPI: API {
     switch self {
     case .verifyToken,
       .loginUser,
-      .listParks:
+      .listParks,
+      .createPark:
       if APIEndpoint.baseURL == "127.0.0.1" {
         return 8080
       }
@@ -86,7 +91,8 @@ public enum ParkAPI: API {
       return "/api/v1/\(path)"
     case .loginUser(let path):
       return "/api/v1/\(path)"
-    case .listParks(let path):
+    case .listParks(let path),
+      .createPark(let path):
       return "/api/v1/\(path)"
     }
   }
@@ -97,7 +103,8 @@ public enum ParkAPI: API {
     case .verifyToken,
       .listParks:
       return .get
-    case .loginUser:
+    case .loginUser,
+      .createPark:
       return .post
     }
   }
