@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct ListView: View {
+  // Private Properties
+  @Environment(ParkViewModel.self) private var parkViewModel
   // Properties
   let parks: [Park]
   @Binding var isAuthenticated: Bool
@@ -25,7 +27,7 @@ struct ListView: View {
     List {
       ForEach(parks, id: \.id) { park in
         NavigationLink {
-            DetailsView(latitude: Double(park.coordinates.latitude), longitude: Double(park.coordinates.longitude), parkName: park.details.name)
+          DetailsView(latitude: Double(park.coordinates.latitude), longitude: Double(park.coordinates.longitude), parkName: park.details.name)
         } label: {
           VStack {
             HStack {
@@ -43,6 +45,11 @@ struct ListView: View {
       .listRowBackground(Color.accent.opacity(0.05))
       .listRowSeparatorTint(.accent.opacity(0.3))
     }
+    .refreshable {
+        Task {
+            try? await parkViewModel.listParks()
+        }
+    }
     .scrollContentBackground(.hidden)
     .listStyle(.grouped)
   }
@@ -51,4 +58,5 @@ struct ListView: View {
 // MARK: - Preview
 #Preview {
   ListView(parks: [Park](), isAuthenticated: .constant(false), errorMessage: .constant(""), showErrorAlert: .constant(false), showLoginView: .constant(false))
+    .environment(ParkViewModel(networkManager: NetworkManager(path: "parks")))
 }

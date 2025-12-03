@@ -59,12 +59,12 @@ struct AddParkView: View {
           // Add button
           Button {
             Task {
-              try await parkViewModel.createPark(
+              try? await parkViewModel.createPark(
                 from: ParkRequest(details: ParkRequest.Details(name: parkName), coordinates: ParkRequest.Coordinates(latitude: latitude, longitude: longitude))
               )
-                
-                try await parkViewModel.listParks()
-                dismiss()
+
+              try await parkViewModel.listParks()
+              dismiss()
             }
           } label: {
             Text("Add")

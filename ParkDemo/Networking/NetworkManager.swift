@@ -173,12 +173,12 @@ public final class NetworkManager {
     request.httpBody = try JSONEncoder().encode(parkRequest)
 
     let (data, response) = try await URLSession.shared.data(for: request)
-    
-      guard let httpResponse = response as? HTTPURLResponse else {
+
+    guard let httpResponse = response as? HTTPURLResponse else {
       throw URLError(.badServerResponse)
     }
 
-    if httpResponse.statusCode != 200 {
+    if httpResponse.statusCode != 201 {
       // Decode error payload to extract message
       struct ServerError: Decodable {
         struct ErrorDetail: Decodable { let message: String }
